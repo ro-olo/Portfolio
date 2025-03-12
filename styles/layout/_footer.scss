@@ -1,0 +1,45 @@
+@use '../abstracts' as *;
+
+.contact {
+  padding: 6rem 2rem;
+  text-align: center;
+
+  &__title {
+    font-size: 2.5rem;
+    background: $gradient-border;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 3rem;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  &__link {
+    font-size: 2rem;
+    color: $text-color;
+    transition: $transition-base;
+
+    &:hover {
+      background: $gradient-border;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: translateY(-3px);
+    }
+  }
+}
+
+.footer {
+  padding: 2rem;
+  text-align: center;
+  @include glass-effect;
+
+  &__text {
+    color: $text-color;
+    opacity: 0.8;
+    font-size: 0.875rem;
+  }
+}

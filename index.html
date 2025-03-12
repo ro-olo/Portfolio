@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>Roberta Grancagnolo | Portfolio</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav__logo">
+            <!-- Logo placeholder -->
+        </div>
+        <ul class="nav__menu">
+            <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+            <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="about">
+        <div class="about__top">
+            <div class="about__info">
+                <h1 class="about__name">Roberta Grancagnolo</h1>
+                <h2 class="about__profession">Front-end Developer</h2>
+            </div>
+            <div class="about__image">
+                <!-- Image placeholder -->
+            </div>
+        </div>
+        <div class="about__bottom">
+            <div class="about__text">
+                <div class="about__text__inner">
+                    <p>Hello! I'm a front-end developer with a strong passion for design and accessibility. Self-taught and highly motivated, I have built real-world projects that have helped me refine my skills in HTML, CSS (SCSS), JavaScript, and React.
+
+                        I love creating modern, intuitive, and accessible interfaces, paying close attention to every detail. My goal is to craft seamless user experiences that are both visually appealing and highly functional.
+                        
+                        I am eager to join the tech industry and apply my skills in a dynamic and collaborative environment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="projects__section">
+            <h2 class="projects__title">Development Projects</h2>
+            <div id="dev-projects" class="projects__grid">
+                <!-- Project cards will be inserted here by JS -->
+            </div>
+        </div>
+        
+        <div class="projects__section">
+            <h2 class="projects__title">Design Projects</h2>
+            <div id="design-projects" class="projects__grid">
+                <!-- Project cards will be inserted here by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="contact__title">Get in Touch</h2>
+        <div class="contact__links">
+            <a href="https://github.com/yourusername" class="contact__link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" class="contact__link" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:your.email@example.com" class="contact__link">
+                <i class="far fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer__text">© <span id="year"></span> Roberta Grancagnolo</p>
+    </footer>
+
+    <script>
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

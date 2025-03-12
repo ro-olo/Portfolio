@@ -1,0 +1,33 @@
+@use 'variables' as *;
+
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin glass-effect {
+  background: $card-bg;
+  backdrop-filter: $blur-effect;
+  border: 1px solid rgba($text-color, 0.1);
+}
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  }
+}
+
+@mixin hover-effect {
+  transition: $transition-base;
+  &:hover {
+    @content;
+  }
+}

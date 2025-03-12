@@ -1,0 +1,54 @@
+@use '../abstracts' as *;
+
+.hero {
+  min-height: 100vh;
+  padding: 8rem 2rem 4rem;
+  @include flex(column, center, center);
+
+  .profile-container {
+    max-width: $container-max-width;
+    width: 100%;
+    @include flex(column, center, center);
+    gap: 3rem;
+    text-align: center;
+
+    @include responsive(md) {
+      flex-direction: row;
+      text-align: left;
+      gap: 4rem;
+    }
+  }
+
+  .profile-image {
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid $accent-color-start;
+      object-fit: cover;
+    }
+  }
+
+  .profile-text {
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+
+      @include responsive(md) {
+        font-size: 3rem;
+      }
+    }
+
+    h2 {
+      background: $gradient-border;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      max-width: 600px;
+      opacity: 0.9;
+    }
+  }
+}

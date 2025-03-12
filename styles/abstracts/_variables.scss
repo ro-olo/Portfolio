@@ -1,0 +1,27 @@
+// Colors
+$background-color: #161819;
+$text-color: #FAFAFA;
+$accent-color-start: #1ACDD5;
+$accent-color-end: #7560EE;
+$card-bg: rgba($background-color, 0.8);
+
+// Typography
+$font-primary: 'Inter', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.6;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Layout
+$container-max-width: 1200px;
+$grid-gap: 2rem;
+$section-padding: 4rem;
+
+// Effects
+$transition-base: all 0.3s ease;
+$blur-effect: blur(10px);
+$gradient-border: linear-gradient(to top, $accent-color-start, $accent-color-end);
