@@ -1,0 +1,16 @@
+@use '../abstracts' as *;
+
+body {
+  background: $background-color;
+  color: $text-color;
+  font-family: $font-primary;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}

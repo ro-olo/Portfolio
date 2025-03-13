@@ -1,24 +1,52 @@
 const projects = {
     dev: [
         {
-            title: "Project 1",
-            description: "Description of project 1",
+            title: "Tic Tac Toe",
+            description: "A classic Tic Tac Toe game built with vanilla JavaScript. Features include player vs player mode, win detection, and a clean, modern interface.",
+            tech: ["HTML", "CSS", "JavaScript"],
+            github: "#",
+            live: "#"
+        },
+        {
+            title: "Rock Paper Scissors",
+            description: "An interactive Rock Paper Scissors game against the computer. Includes score tracking, animated transitions, and responsive design.",
             tech: ["HTML", "SCSS", "JavaScript"],
             github: "#",
             live: "#"
         },
-        // Add more dev projects here
+        {
+            title: "Bookshelf App",
+            description: "A web application to manage your reading list. Features include book tracking, search functionality, and local storage for data persistence.",
+            tech: ["HTML", "SCSS", "JavaScript", "LocalStorage"],
+            github: "#",
+            live: "#"
+        }
     ],
     design: [
         {
-            title: "Design Project 1",
-            description: "Description of design project 1",
-            tech: ["Figma", "Adobe XD"],
+            title: "E-commerce UI Design",
+            description: "Modern e-commerce interface design focusing on user experience and accessibility. Includes product listings, cart, and checkout flows.",
+            tech: ["Figma", "UI Design", "Prototyping"],
             github: "#",
             live: "#",
             isDesign: true
         },
-        // Add more design projects here
+        {
+            title: "Weather App Design",
+            description: "Clean and intuitive weather application design with focus on data visualization and daily/weekly forecast views.",
+            tech: ["Adobe XD", "UI Design", "Interaction Design"],
+            github: "#",
+            live: "#",
+            isDesign: true
+        },
+        {
+            title: "Task Manager UI",
+            description: "Minimalist task management application design with focus on productivity and ease of use. Features dark mode and customizable categories.",
+            tech: ["Figma", "UI Design", "Design System"],
+            github: "#",
+            live: "#",
+            isDesign: true
+        }
     ]
 };
 

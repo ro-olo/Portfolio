@@ -6,6 +6,10 @@ $accent-color-end: #7560EE;
 $design-accent: #EF42FF;
 $card-bg: rgba($background-color, 0.8);
 
+// Card Gradients
+$dev-gradient: linear-gradient(135deg, #1ACDD5 0%, #4B7BF5 100%);
+$design-gradient: linear-gradient(135deg, #EF42FF 0%, #9B51E0 100%);
+
 // Typography
 $font-primary: 'Inter', sans-serif;
 $font-size-base: 1rem;        // 16px
@@ -24,6 +28,3 @@ $blur-effect: blur(10px);
 $transition-base: all 0.3s ease;
 $transition-fast: all 0.2s ease;
 $transition-slow: all 0.4s ease;
-
-// Gradients
-$gradient-border: linear-gradient(135deg, $accent-color-start, $accent-color-end);

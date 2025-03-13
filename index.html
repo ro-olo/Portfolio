@@ -11,9 +11,18 @@
     <title>Roberta Grancagnolo | Portfolio</title>
 </head>
 <body>
+    <div class="background">
+        <div class="background__image background__image--top">
+            <img src="assets/images/top-background.jpg" alt="">
+        </div>
+        <div class="background__image background__image--bottom">
+            <img src="assets/images/bottom-background.jpg" alt="">
+        </div>
+    </div>
+
     <nav class="nav">
         <div class="nav__logo">
-            <!-- Logo placeholder -->
+            <img src="assets/images/logo.png" alt="Logo">
         </div>
         <ul class="nav__menu">
             <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
@@ -69,11 +78,32 @@
     </section>
 
     <footer class="footer">
-        <p class="footer__text">© <span id="year"></span> Roberta Grancagnolo</p>
+        <p class="footer__text"> 2023 Roberta Grancagnolo</p>
     </footer>
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const topImage = document.querySelector('.background__image--top');
+            const bottomImage = document.querySelector('.background__image--bottom');
+            
+            // Muovi l'immagine superiore con un leggero parallax
+            const topImageStartPosition = window.innerHeight * 1.2; // 120vh in pixels
+            if (scrolled > topImageStartPosition) {
+                const delta = scrolled - topImageStartPosition;
+                topImage.style.transform = `translateX(-50%) rotate(30deg) translateY(${delta * 0.1}px)`;
+            }
+            
+            // Muovi l'immagine inferiore con un effetto parallax più pronunciato
+            const bottomImageStartPosition = document.documentElement.scrollHeight - window.innerHeight * 2;
+            if (scrolled > bottomImageStartPosition) {
+                const delta = scrolled - bottomImageStartPosition;
+                bottomImage.style.transform = `translateX(-50%) translateY(${delta * 0.2}px)`;
+            }
+        });
     </script>
     <script src="script.js"></script>
 </body>
