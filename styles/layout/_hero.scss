@@ -12,13 +12,13 @@
   }
 
   &__name {
-    font-size: 3.5rem;
+    font-size: $font-size-3xl;
     margin-bottom: 1rem;
     color: $text-color;
   }
 
   &__profession {
-    font-size: 2rem;
+    font-size: $font-size-xl;
     background: $gradient-border;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
