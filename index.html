@@ -78,33 +78,9 @@
     </section>
 
     <footer class="footer">
-        <p class="footer__text"> 2023 Roberta Grancagnolo</p>
+        <p class="footer__text"> 2024 Roberta Grancagnolo</p>
     </footer>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const topImage = document.querySelector('.background__image--top');
-            const bottomImage = document.querySelector('.background__image--bottom');
-            
-            // Muovi l'immagine superiore con un leggero parallax
-            const topImageStartPosition = window.innerHeight * 1.2; // 120vh in pixels
-            if (scrolled > topImageStartPosition) {
-                const delta = scrolled - topImageStartPosition;
-                topImage.style.transform = `translateX(-50%) rotate(30deg) translateY(${delta * 0.1}px)`;
-            }
-            
-            // Muovi l'immagine inferiore con un effetto parallax più pronunciato
-            const bottomImageStartPosition = document.documentElement.scrollHeight - window.innerHeight * 2;
-            if (scrolled > bottomImageStartPosition) {
-                const delta = scrolled - bottomImageStartPosition;
-                bottomImage.style.transform = `translateX(-50%) translateY(${delta * 0.2}px)`;
-            }
-        });
-    </script>
     <script src="script.js"></script>
 </body>
 </html>

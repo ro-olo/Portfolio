@@ -78,14 +78,19 @@ function createProjectCard(project) {
     return card;
 }
 
-// Populate projects
-const devProjectsContainer = document.getElementById('dev-projects');
-const designProjectsContainer = document.getElementById('design-projects');
+// Aspetta che il DOM sia completamente caricato
+document.addEventListener('DOMContentLoaded', () => {
+    // Populate projects
+    const devProjectsContainer = document.getElementById('dev-projects');
+    const designProjectsContainer = document.getElementById('design-projects');
 
-projects.dev.forEach(project => {
-    devProjectsContainer.appendChild(createProjectCard(project));
-});
+    if (devProjectsContainer && designProjectsContainer) {
+        projects.dev.forEach(project => {
+            devProjectsContainer.appendChild(createProjectCard(project));
+        });
 
-projects.design.forEach(project => {
-    designProjectsContainer.appendChild(createProjectCard(project));
+        projects.design.forEach(project => {
+            designProjectsContainer.appendChild(createProjectCard(project));
+        });
+    }
 });

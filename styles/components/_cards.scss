@@ -2,14 +2,13 @@
 
 .project-card {
   background: $background-color;
-  backdrop-filter: $blur-effect;
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
   transition: $transition-base;
-  border: 1px solid transparent;
   padding: 1.5rem;
 
+  // Border gradient
   &::before {
     content: '';
     position: absolute;
