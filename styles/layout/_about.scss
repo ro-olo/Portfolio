@@ -1,15 +1,26 @@
 @use '../abstracts' as *;
 
 .about {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+
   &__text {
     max-width: 800px;
     text-align: center;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: rgba($text-color, 0.9);
     background: $card-bg;
     border: 1px solid $accent-color-start;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 3rem;
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: rgba($text-color, 0.9);
+      
+      &:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
   }
 }

@@ -1,0 +1,26 @@
+@use '../abstracts' as *;
+
+.hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+
+  &__content {
+    text-align: center;
+  }
+
+  &__name {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: $text-color;
+  }
+
+  &__profession {
+    font-size: 2rem;
+    background: $gradient-border;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
