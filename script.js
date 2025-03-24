@@ -3,49 +3,55 @@ const projects = {
         {
             title: "Tic Tac Toe",
             description: "A classic Tic Tac Toe game built with vanilla JavaScript. Features include player vs player mode, win detection, and a clean, modern interface.",
-            tech: ["HTML", "CSS", "JavaScript"],
+            tech: ["HTML", "CSS", "JS"],
             github: "#",
-            live: "#"
+            live: "#",
+            image: "assets/images/RPS.png"
         },
         {
             title: "Rock Paper Scissors",
             description: "An interactive Rock Paper Scissors game against the computer. Includes score tracking, animated transitions, and responsive design.",
-            tech: ["HTML", "SCSS", "JavaScript"],
+            tech: ["HTML", "SCSS", "JS"],
             github: "#",
-            live: "#"
+            live: "#",
+            image: "assets/images/RPS.png"
         },
         {
             title: "Bookshelf App",
             description: "A web application to manage your reading list. Features include book tracking, search functionality, and local storage for data persistence.",
-            tech: ["HTML", "SCSS", "JavaScript", "LocalStorage"],
+            tech: ["HTML", "SCSS", "JS"],
             github: "#",
-            live: "#"
+            live: "#",
+            image: "assets/images/RPS.png"
         }
     ],
     design: [
         {
-            title: "E-commerce UI Design",
-            description: "Modern e-commerce interface design focusing on user experience and accessibility. Includes product listings, cart, and checkout flows.",
-            tech: ["Figma", "UI Design", "Prototyping"],
+            title: "Bookshelf App",
+            description: "A web application to manage your reading list. Features include book tracking, search functionality, and local storage for data persistence.",
+            tech: ["Figma", "Procreate"],
             github: "#",
             live: "#",
-            isDesign: true
+            isDesign: true,
+            image: "assets/images/RPS.png"
         },
         {
-            title: "Weather App Design",
+            title: "Portfolio Design",
             description: "Clean and intuitive weather application design with focus on data visualization and daily/weekly forecast views.",
             tech: ["Adobe XD", "UI Design", "Interaction Design"],
             github: "#",
             live: "#",
-            isDesign: true
+            isDesign: true,
+            image: "assets/images/RPS.png"
         },
         {
-            title: "Task Manager UI",
+            title: "App redesign",
             description: "Minimalist task management application design with focus on productivity and ease of use. Features dark mode and customizable categories.",
             tech: ["Figma", "UI Design", "Design System"],
             github: "#",
             live: "#",
-            isDesign: true
+            isDesign: true,
+            image: "assets/images/RPS.png"
         }
     ]
 };
@@ -56,7 +62,7 @@ function createProjectCard(project) {
 
     card.innerHTML = `
         <div class="project-card__image">
-            <div class="project-card__image-placeholder"></div>
+            <img src="${project.image}" alt="${project.title} image">
         </div>
         <div class="project-card__content">
             <h3 class="project-card__title">${project.title}</h3>
