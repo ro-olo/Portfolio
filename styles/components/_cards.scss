@@ -6,8 +6,7 @@
   overflow: hidden;
   position: relative;
   transition: $transition-base;
-  padding: 1.5rem;
-  height: 36rem;
+  height: 34rem;
   display: flex;
   flex-direction: column;
   min-width: 350px;
@@ -36,7 +35,14 @@
     box-shadow: 0 0.5rem 1rem rgba($color: #6eaacd, $alpha: 0.2);
   }
 
-  &__title {
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    height: 100%;
+  }
+
+  &__content &__title {
     font-size: $font-size-lg;
     color: $text-color;
     margin-bottom: 1rem;
@@ -44,11 +50,26 @@
     order: -1;
   }
 
-  &__tech {
+  &__content &__image {
+    width: 100%;
+    height: 160px;
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+    background: rgba($background-color, 0.3);
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__content &__tech {
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
     flex-shrink: 0;
     height: 3rem;
     align-content: flex-start;
@@ -61,23 +82,7 @@
     }
   }
 
-  &__image {
-    width: 100%;
-    height: 160px;
-    margin-bottom: 1rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    background: rgba($background-color, 0.3);
-    flex-shrink: 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__description {
+  &__content &__description {
     color: rgba($text-color, 0.8);
     line-height: 1.6;
     font-size: $font-size-sm;
@@ -94,6 +99,7 @@
     margin-top: auto;
     flex-shrink: 0;
     padding-top: 1.5rem;
+    justify-content: flex-end;
 
     .btn {
       padding: 0.5rem 0.75rem;
