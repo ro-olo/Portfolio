@@ -71,11 +71,11 @@ function createProjectCard(project) {
             </div>
             <p class="project-card__description">${project.description}</p>
             <div class="project-card__links">
-                <a href="${project.github}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i> GitHub
+                <a href="${project.github}" class="btn btn--outline" target="_blank" rel="noopener noreferrer" aria-label="View on GitHub">
+                    <i class="fab fa-github"></i>
                 </a>
-                <a href="${project.live}" class="btn btn--outline" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-external-link-alt"></i> Live Demo
+                <a href="${project.live}" class="btn btn--outline" target="_blank" rel="noopener noreferrer" aria-label="View Live Demo">
+                    <i class="fas fa-external-link-alt"></i>
                 </a>
             </div>
         </div>

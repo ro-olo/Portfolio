@@ -9,7 +9,7 @@
   height: 34rem;
   display: flex;
   flex-direction: column;
-  min-width: 350px;
+  min-width: 320px;
 
   // Border gradient
   &::before {
@@ -32,7 +32,7 @@
   }
 
   &:hover {
-    box-shadow: 0 0.5rem 1rem rgba($color: #6eaacd, $alpha: 0.2);
+    box-shadow: 0 0.5rem 1rem rgba($color: $accent-color-end, $alpha: 0.4);
   }
 
   &__content {

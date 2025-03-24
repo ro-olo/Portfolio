@@ -3,16 +3,17 @@
 .projects {
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 12rem;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 4rem 0;
   position: relative;
 
   &__section {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    padding: 0 2rem;
   }
 
   &__title {
@@ -25,7 +26,8 @@
   &__grid {
     display: grid;
     grid-template-columns: repeat(3, 330px);
-    gap: 5rem;
+    gap: 4rem;
     justify-content: center;
+    width: 100%;
   }
 }

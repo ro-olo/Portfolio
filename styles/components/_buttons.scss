@@ -3,23 +3,18 @@
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  justify-content: center;
+  padding: 0.5rem;
   transition: $transition-base;
+  color: $text-color;
+  font-size: 2rem;
 
-  &--outline {
-    border: 1px solid rgba($text-color, 0.2);
-    color: $text-color;
-
-    &:hover {
-      border-color: $accent-color-start;
-      background: rgba($accent-color-start, 0.1);
-    }
+  &:hover {
+    transform: translateY(-1px) scale(1.1);
+    color: $accent-color-end;
   }
 
   i {
-    font-size: 1.1em;
+    font-size: 2rem;
   }
 }
