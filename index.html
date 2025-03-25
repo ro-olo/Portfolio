@@ -26,8 +26,13 @@
 
     <section class="hero">
         <div class="hero__content">
-            <h1 class="hero__name">Roberta Grancagnolo</h1>
-            <h2 class="hero__profession">Front-end Developer</h2>
+            <div class="hero__info">
+                <h1 class="hero__name">Roberta Grancagnolo</h1>
+                <h2 class="hero__profession">Front-end Developer</h2>
+            </div>
+            <div class="hero__image">
+                <img src="assets/images/profile.jpg" alt="Roberta Grancagnolo">
+            </div>
         </div>
     </section>
 
@@ -40,17 +45,32 @@
     </section>
 
     <section id="projects" class="projects">
-        <div class="projects__section">
-            <h2 class="projects__title">Development Projects</h2>
-            <div id="dev-projects" class="projects__grid">
-                <!-- Project cards will be inserted here by JS -->
+        <div class="projects__section projects__section--dev">
+            <h2 class="projects__title">Dev Projects</h2>
+            <div class="projects__grid">
+                <div class="projects__track">
+                    <div class="projects__carousel" id="devProjects"></div>
+                </div>
+                <div class="projects__navigation">
+                    <div class="projects__navigation-container">
+                        <button class="prev" aria-label="Previous projects"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next" aria-label="Next projects"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="projects__section">
+        <div class="projects__section projects__section--design">
             <h2 class="projects__title">Design Projects</h2>
-            <div id="design-projects" class="projects__grid">
-                <!-- Project cards will be inserted here by JS -->
+            <div class="projects__grid">
+                <div class="projects__track">
+                    <div class="projects__carousel" id="designProjects"></div>
+                </div>
+                <div class="projects__navigation">
+                    <div class="projects__navigation-container">
+                        <button class="prev" aria-label="Previous projects"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next" aria-label="Next projects"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

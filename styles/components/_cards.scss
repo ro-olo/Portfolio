@@ -6,7 +6,7 @@
   overflow: hidden;
   position: relative;
   transition: $transition-base;
-  height: 34rem;
+  height: 32rem;
   display: flex;
   flex-direction: column;
   min-width: 320px;
@@ -73,6 +73,7 @@
     flex-shrink: 0;
     height: 3rem;
     align-content: flex-start;
+    font-weight: 300;
 
     span {
       background: rgba($background-color, 0.3);
