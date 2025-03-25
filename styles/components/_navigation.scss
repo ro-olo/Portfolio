@@ -11,7 +11,7 @@
   align-items: center;
   z-index: 100;
   background: $background-color;
-  padding-bottom: 1rem; // Spazio extra per la sfumatura
+  padding-bottom: 0.5rem;
 
   &__logo {
     height: 2.5rem;
@@ -51,7 +51,7 @@
     }
 
     &:hover {
-      color: rgba($text-color, 0.8);
+      color: rgba($text-color, 0.9);
 
       &::after {
         width: 100%;

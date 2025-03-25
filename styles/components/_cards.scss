@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   min-width: 320px;
+  box-shadow: 0 0.5rem 1rem rgba($color: $accent-color-end, $alpha: 0.1);
 
   // Border gradient
   &::before {
@@ -32,7 +33,7 @@
   }
 
   &:hover {
-    box-shadow: 0 0.5rem 1rem rgba($color: $accent-color-end, $alpha: 0.4);
+    /* Rimosso box-shadow dall'hover */
   }
 
   &__content {
