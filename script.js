@@ -193,6 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
             this.initialize();
             this.setupEventListeners();
             this.updateCarousel();
+            
+            // Aggiungi listener per il resize della finestra
+            window.addEventListener('resize', () => {
+                this.updateActiveCards();
+            });
         }
 
         initialize() {
@@ -293,6 +298,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateActiveCards(noTransition = false) {
             const cards = this.track.querySelectorAll('.project-card');
             const totalCards = cards.length;
+            const windowWidth = window.innerWidth;
+            let visibleCards = 3;
+            
+            // Determina il numero di cards visibili in base alla larghezza dello schermo
+            if (windowWidth <= 1100 && windowWidth > 800) {
+                visibleCards = 2;
+            } else if (windowWidth <= 800) {
+                visibleCards = 1;
+            }
             
             cards.forEach((card, index) => {
                 if (noTransition) {
@@ -304,9 +318,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const relativeIndex = (index - this.currentIndex + totalCards) % totalCards;
                 
-                if (relativeIndex >= 0 && relativeIndex < 3) {
+                if (relativeIndex >= 0 && relativeIndex < visibleCards) {
                     card.classList.add('active');
-                    if (relativeIndex === 1) {
+                    
+                    // Aggiungi la classe center solo se ci sono 3 cards visibili
+                    if (visibleCards === 3 && relativeIndex === 1) {
                         card.classList.add('center');
                     }
                 }
