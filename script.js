@@ -1,3 +1,86 @@
+// Gestione parallax background
+document.addEventListener('DOMContentLoaded', () => {
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    
+    // Use a more sophisticated approach for ultra-smooth parallax
+    let parallaxInstances = [];
+    
+    // Initialize parallax for each layer
+    parallaxLayers.forEach(layer => {
+        const speed = parseFloat(layer.getAttribute('data-speed'));
+        
+        window.addEventListener('scroll', () => {
+            // Use GSAP for smoother transitions with minimal lag
+            gsap.to(layer, {
+                y: -(window.scrollY * speed),
+                ease: 'power1.out',
+                duration: 0.5,
+                overwrite: 'auto'
+            });
+        });
+    });
+    
+    // Add GSAP library if not already present
+    if (typeof gsap === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
+        script.async = true;
+        script.onload = function() {
+            // Initialize parallax after GSAP loads
+            initParallax();
+        };
+        document.head.appendChild(script);
+    } else {
+        initParallax();
+    }
+    
+    function initParallax() {
+        // Initial position
+        parallaxLayers.forEach(layer => {
+            const speed = parseFloat(layer.getAttribute('data-speed'));
+            gsap.set(layer, {
+                y: -(window.scrollY * speed)
+            });
+        });
+    }
+
+    // Visualizzazione dei progetti
+    const devProjectsData = [
+        // I tuoi dati dei progetti di sviluppo qui
+    ];
+
+    const designProjectsData = [
+        // I tuoi dati dei progetti di design qui
+    ];
+
+    // Funzione per rendere i progetti
+    function renderProjects(projectsData, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        projectsData.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'project-card';
+            // Aggiungi il contenuto della card del progetto
+        });
+    }
+
+    // Renderizza i progetti
+    renderProjects(devProjectsData, 'devProjects');
+    renderProjects(designProjectsData, 'designProjects');
+
+    // Gestione carousel progetti
+    document.querySelectorAll('.projects__section').forEach(section => {
+        const carousel = section.querySelector('.projects__carousel');
+        const prevBtn = section.querySelector('.prev');
+        const nextBtn = section.querySelector('.next');
+
+        if (carousel && prevBtn && nextBtn) {
+            // Aggiungi la logica del carousel qui
+        }
+    });
+});
+
 const projects = {
     dev: [
         {
@@ -365,53 +448,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.projects__title').forEach(title => {
         observer.observe(title);
     });
-    
-    // Parallax effect for background image
-    const parallaxLayers = document.querySelectorAll('.parallax-layer');
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    
-    function updateParallax() {
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const documentHeight = document.body.scrollHeight;
-        
-        parallaxLayers.forEach(layer => {
-            const speed = parseFloat(layer.getAttribute('data-speed'));
-            
-            // Calcolo più fluido per l'effetto parallax
-            const yPos = -(scrollY * speed);
-            
-            // Applica la trasformazione
-            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
-        });
-        
-        lastScrollY = scrollY;
-        ticking = false;
-    }
-    
-    // Throttle dello scroll per migliorare le prestazioni
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                updateParallax();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-    
-    // Aggiorna anche quando la finestra viene ridimensionata
-    window.addEventListener('resize', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                updateParallax();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-    
-    // Inizializza l'effetto parallax
-    updateParallax();
 });

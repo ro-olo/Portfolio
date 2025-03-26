@@ -1,7 +1,7 @@
 @use '../abstracts' as *;
 
 .project-card {
-  background: $background-color;
+  background: $card-bg;
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
@@ -30,10 +30,6 @@
 
   &--design::before {
     background: $design-gradient;
-  }
-
-  &:hover {
-    /* Rimosso box-shadow dall'hover */
   }
 
   &__content {

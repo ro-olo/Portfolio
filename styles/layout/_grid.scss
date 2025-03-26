@@ -125,7 +125,7 @@
       }
 
       &.center {
-        transform: scale(1.002);
+        transform: scale(1.002) translateY(-10px);
         box-shadow: 0 0.5rem 1.5rem rgba($color: $accent-color-end, $alpha: 0.2);
       }
     }
