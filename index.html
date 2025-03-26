@@ -9,16 +9,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <title>Roberta Grancagnolo | Portfolio</title>
+    <style>
+        .background {
+            background-image: url('assets/images/background.jpg');
+        }
+    </style>
 </head>
 <body>
-    <div class="background" style="background-image: url('assets/images/background.jpg');"></div>
+    <div class="background">
+        <div class="parallax-layer" data-speed="0.3">
+            <img src="assets/images/background.jpg" alt="Background" class="background-image">
+        </div>
+    </div>
     
     <nav class="nav">
         <div class="nav__logo">
             <img src="assets/images/logo.png" alt="Logo">
         </div>
         <ul class="nav__menu">
-            <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+            <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
             <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
             <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
@@ -29,18 +38,15 @@
             <div class="hero__info">
                 <h1 class="hero__name">Roberta Grancagnolo</h1>
                 <h2 class="hero__profession">Front-end Developer</h2>
+                <div class="hero__about">
+                    <p>Hello! I'm a front-end developer with a strong passion for design and accessibility. Self-taught and highly motivated, I have built real-world projects that have helped me refine my skills in HTML, CSS (SCSS), JavaScript, and React.</p>
+                    <p>I love creating modern, intuitive, and accessible interfaces, paying close attention to every detail. My goal is to craft seamless user experiences that are both visually appealing and highly functional.</p>
+                    <p>I am eager to join the tech industry and apply my skills in a dynamic and collaborative environment.</p>
+                </div>
             </div>
             <div class="hero__image">
                 <img src="assets/images/profile.jpg" alt="Roberta Grancagnolo">
             </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="about__text">
-            <p>Hello! I'm a front-end developer with a strong passion for design and accessibility. Self-taught and highly motivated, I have built real-world projects that have helped me refine my skills in HTML, CSS (SCSS), JavaScript, and React.</p>
-            <p>I love creating modern, intuitive, and accessible interfaces, paying close attention to every detail. My goal is to craft seamless user experiences that are both visually appealing and highly functional.</p>
-            <p>I am eager to join the tech industry and apply my skills in a dynamic and collaborative environment.</p>
         </div>
     </section>
 

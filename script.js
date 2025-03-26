@@ -366,5 +366,52 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(title);
     });
     
-    // Qui andrà il nuovo codice per il parallax quando lo riscriveremo
+    // Parallax effect for background image
+    const parallaxLayers = document.querySelectorAll('.parallax-layer');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.body.scrollHeight;
+        
+        parallaxLayers.forEach(layer => {
+            const speed = parseFloat(layer.getAttribute('data-speed'));
+            
+            // Calcolo più fluido per l'effetto parallax
+            const yPos = -(scrollY * speed);
+            
+            // Applica la trasformazione
+            layer.style.transform = `translate3d(0, ${yPos}px, 0)`;
+        });
+        
+        lastScrollY = scrollY;
+        ticking = false;
+    }
+    
+    // Throttle dello scroll per migliorare le prestazioni
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateParallax();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Aggiorna anche quando la finestra viene ridimensionata
+    window.addEventListener('resize', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateParallax();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+    
+    // Inizializza l'effetto parallax
+    updateParallax();
 });
