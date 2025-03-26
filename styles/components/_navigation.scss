@@ -30,6 +30,47 @@
     display: flex;
     gap: 2rem;
     list-style: none;
+    align-items: center; // Allinea verticalmente tutti gli elementi
+  }
+
+  &__item {
+    position: relative;
+    
+    &--dropdown {
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; // Allineato a sinistra invece che al centro
+        transform: translateX(-60%); // Rimosso per non spostare il menu a destra
+        background-color: rgba($background-color, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 0.5rem;
+        padding: 0.5rem 0;
+        min-width: 200px; // Leggermente più largo
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        z-index: 101;
+        margin-top: 0.5rem;
+        border: 1px solid rgba($accent-color-start, 0.2);
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: -5px;
+          left: 20px; // Spostato a sinistra
+          width: 10px;
+          height: 10px;
+          background-color: rgba($background-color, 0.9);
+          transform: rotate(45deg);
+          border-top: 1px solid rgba($accent-color-start, 0.2);
+          border-left: 1px solid rgba($accent-color-start, 0.2);
+        }
+      }
+      
+      &:hover .dropdown-menu {
+        display: block;
+      }
+    }
   }
 
   &__link {
@@ -41,6 +82,8 @@
     padding: 0.5rem 0;
     padding-bottom: 0.3rem; // Ridotto il padding
     transition: color 0.3s ease;
+    display: inline-flex; // Rende tutti i link flexbox
+    align-items: center; // Centra verticalmente il contenuto
 
     &::after {
       content: '';
@@ -60,5 +103,46 @@
         width: 100%;
       }
     }
+    
+    &--dropdown {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      
+      i {
+        font-size: 0.7rem;
+        transition: transform 0.3s ease;
+        margin-top: 1px; // Piccolo aggiustamento verticale dell'icona
+      }
+      
+      &:hover i {
+        transform: translateY(2px);
+      }
+    }
+  }
+}
+
+.dropdown-item {
+  list-style: none;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: $text-color;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: left; // Allineamento a sinistra per una migliore leggibilità
+  
+  &:hover {
+    background-color: rgba($accent-color-start, 0.1);
+    color: $accent-color-start;
+  }
+  
+  &.active {
+    color: $accent-color-start;
+    font-weight: 500;
+    background-color: rgba($accent-color-start, 0.05);
   }
 }

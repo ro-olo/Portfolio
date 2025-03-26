@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roberta Grancagnolo - Boring Portfolio</title>
+    <style>
+        body {
+            background-color: #EEEEEE;
+            font-family: Times New Roman, serif;
+            margin: 0;
+            padding: 0;
+            color: #000000;
+            cursor: url('https://cur.cursors-4u.net/cursors/cur-1/cur1.cur'), auto;
+        }
+        
+        header {
+            background-color: #CCCCCC;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 3px solid #999999;
+        }
+        
+        .nav {
+            background-color: #DDDDDD;
+            padding: 5px;
+            text-align: center;
+        }
+        
+        .nav a {
+            color: blue;
+            text-decoration: underline;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        
+        .hero {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .hero img {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #999999;
+            margin-bottom: 10px;
+        }
+        
+        .hero h1 {
+            color: #990000;
+            font-size: 24px;
+            margin: 5px 0;
+        }
+        
+        .hero h2 {
+            color: #000099;
+            font-size: 18px;
+            margin: 5px 0 15px 0;
+        }
+        
+        .hero p {
+            font-size: 14px;
+            line-height: 1.3;
+            margin: 5px 0;
+            text-align: justify;
+        }
+        
+        .projects {
+            background-color: #DDDDDD;
+            padding: 20px;
+        }
+        
+        .projects h2 {
+            text-align: center;
+            color: #990000;
+            font-size: 20px;
+            text-decoration: underline;
+            margin-bottom: 15px;
+        }
+        
+        .project-card {
+            background-color: #FFFFFF;
+            border: 2px solid #999999;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        
+        .project-card h3 {
+            color: #000099;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        
+        .project-card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .contact {
+            padding: 20px;
+            text-align: center;
+            background-color: #CCCCCC;
+        }
+        
+        .contact h2 {
+            color: #990000;
+            font-size: 20px;
+            text-decoration: underline;
+        }
+        
+        .contact a {
+            display: inline-block;
+            margin: 10px;
+            color: blue;
+            text-decoration: underline;
+        }
+        
+        footer {
+            background-color: #999999;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        marquee {
+            background-color: yellow;
+            color: red;
+            padding: 5px;
+        }
+        
+        blink {
+            animation: blinker 1s linear infinite;
+        }
+        
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        /* Pop-up styles */
+        .popup {
+            position: fixed;
+            background-color: #FFCCCC;
+            border: 3px solid #FF0000;
+            padding: 10px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            font-family: Comic Sans MS, cursive;
+            color: #000099;
+            text-align: center;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #FF0000;
+            color: white;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        
+        .popup-content {
+            margin-top: 15px;
+        }
+        
+        .popup-button {
+            background-color: #00FF00;
+            border: 2px solid #0000FF;
+            padding: 5px 10px;
+            margin-top: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        #visitor-counter {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            border: 1px solid black;
+            padding: 5px;
+            font-size: 12px;
+        }
+        
+        /* Annoying background image */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><rect width="50" height="50" fill="%23ffffff" /><rect width="25" height="25" fill="%23cccccc" /><rect width="25" height="25" x="25" y="25" fill="%23cccccc" /></svg>');
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        /* Back to cool site button */
+        .back-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #00FF00;
+            border: 3px solid #0000FF;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF0000;
+            z-index: 9999; /* Assicura che sia sopra tutti i popup */
+            cursor: pointer;
+            animation: pulse 1s infinite;
+            text-decoration: none;
+            box-shadow: 0 0 10px 5px yellow;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+    <script>
+        // Controlla se siamo stati reindirizzati dal tema "boring"
+        window.onload = function() {
+            // Resetta il tema in localStorage quando si visita direttamente questa pagina
+            if (localStorage.getItem('selectedTheme') === 'boring') {
+                // Aggiungi un listener al pulsante di ritorno
+                document.querySelectorAll('a[href="index.html"]').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // Imposta il tema predefinito prima di tornare alla pagina principale
+                        localStorage.setItem('selectedTheme', 'coolest-ever');
+                    });
+                });
+            }
+        };
+    </script>
+</head>
+<body>
+    <a href="index.html" class="back-button">ESCAPE TO COOL SITE!!!</a>
+    
+    <div class="bg-pattern"></div>
+    
+    <header>
+        <img src="assets/images/logo.png" alt="Logo" width="100">
+    </header>
+    
+    <div class="nav">
+        <a href="index.html">BACK TO COOL SITE</a> |
+        <a href="#home">HOME</a> |
+        <a href="#projects">PROJECTS</a> |
+        <a href="#contact">CONTACT</a>
+    </div>
+    
+    <marquee scrollamount="5" direction="left">
+        <blink>WELCOME TO MY BORING WEBSITE! CLICK HERE TO WIN AN IPHONE! SPECIAL OFFER!!! CONGRATULATIONS, YOU ARE THE 1,000,000th VISITOR!!!</blink>
+    </marquee>
+    
+    <div class="hero" id="home">
+        <img src="assets/images/profile.jpg" alt="Roberta Grancagnolo">
+        <h1>Roberta Grancagnolo</h1>
+        <h2>Front-end Developer</h2>
+        <p>
+            Hello! I'm a front-end developer with a strong passion for design and accessibility. 
+            Self-taught and highly motivated, I have built real-world projects that have helped me refine 
+            my skills in HTML, CSS (SCSS), JavaScript, and React.
+        </p>
+        <p>
+            I love creating modern, intuitive, and accessible interfaces, paying close attention to every detail. 
+            My goal is to craft seamless user experiences that are both visually appealing and highly functional.
+        </p>
+        <p>
+            I am eager to join the tech industry and apply my skills in a dynamic and collaborative environment.
+        </p>
+    </div>
+    
+    <div class="projects" id="projects">
+        <h2>MY PROJECTS</h2>
+        
+        <div class="project-card">
+            <h3>Development Project 1</h3>
+            <p>Description of development project. Technologies used: HTML, CSS, JavaScript.</p>
+        </div>
+        
+        <div class="project-card">
+            <h3>Development Project 2</h3>
+            <p>Description of development project. Technologies used: React, SCSS.</p>
+        </div>
+        
+        <div class="project-card">
+            <h3>Design Project 1</h3>
+            <p>Description of design project. Tools used: Figma, Adobe Photoshop.</p>
+        </div>
+        
+        <div class="project-card">
+            <h3>Design Project 2</h3>
+            <p>Description of design project. Tools used: Adobe Illustrator, Sketch.</p>
+        </div>
+    </div>
+    
+    <div class="contact" id="contact">
+        <h2>CONTACT ME</h2>
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+        <a href="mailto:your.email@example.com">Email</a>
+    </div>
+    
+    <footer>
+        &copy; 2024 Roberta Grancagnolo - Site created with basic HTML and CSS
+    </footer>
+    
+    <div id="visitor-counter"></div>
+    
+    <script>
+        // Create annoying popups that cover text
+        function createPopup(title, content, x, y, width, height) {
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.style.width = width + 'px';
+            popup.style.height = height + 'px';
+            popup.style.left = x + 'px';
+            popup.style.top = y + 'px';
+            
+            const closeBtn = document.createElement('div');
+            closeBtn.className = 'popup-close';
+            closeBtn.innerHTML = 'X';
+            closeBtn.onclick = function() {
+                // Move to a random position instead of closing
+                popup.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+                popup.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+            };
+            
+            const titleElem = document.createElement('h3');
+            titleElem.innerHTML = title;
+            
+            const contentElem = document.createElement('div');
+            contentElem.className = 'popup-content';
+            contentElem.innerHTML = content;
+            
+            const button = document.createElement('button');
+            button.className = 'popup-button';
+            button.innerHTML = 'OK';
+            button.onclick = function() {
+                // Create another popup when this one is "closed"
+                setTimeout(function() {
+                    createRandomPopup();
+                }, 500);
+                // Move to a random position instead of closing
+                popup.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+                popup.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+            };
+            
+            popup.appendChild(closeBtn);
+            popup.appendChild(titleElem);
+            popup.appendChild(contentElem);
+            popup.appendChild(button);
+            
+            document.body.appendChild(popup);
+        }
+        
+        // Array of annoying popup contents
+        const popupContents = [
+            { title: 'CONGRATULATIONS!', content: 'You\'ve won a FREE iPhone! Click OK to claim now!' },
+            { title: 'WARNING!', content: 'Your computer may be at risk! Click OK to scan now!' },
+            { title: 'SURVEY', content: 'Please take our quick survey to improve your browsing experience!' },
+            { title: 'HOT SINGLES', content: 'Hot singles in your area want to meet you! Click OK now!' },
+            { title: 'LAST CHANCE', content: '50% OFF! Limited time offer expires in 10 minutes!' },
+            { title: 'SUBSCRIBE', content: 'Subscribe to our newsletter for daily updates!' },
+            { title: 'VIRUS DETECTED', content: 'Your computer has 48 viruses! Click OK to remove them now!' },
+            { title: 'BATTERY LOW', content: 'Your computer\'s battery is running low! Click OK to boost performance!' }
+        ];
+        
+        // Create a random popup
+        function createRandomPopup() {
+            const content = popupContents[Math.floor(Math.random() * popupContents.length)];
+            const x = Math.random() * (window.innerWidth - 300);
+            const y = Math.random() * (window.innerHeight - 200);
+            const width = Math.random() * 100 + 200;
+            const height = Math.random() * 100 + 100;
+            
+            createPopup(content.title, content.content, x, y, width, height);
+        }
+        
+        // Initial popups
+        setTimeout(function() {
+            createRandomPopup();
+        }, 3000);
+        
+        setTimeout(function() {
+            createRandomPopup();
+        }, 6000);
+        
+        setTimeout(function() {
+            createRandomPopup();
+        }, 10000);
+        
+        // Annoying alert
+        setTimeout(function() {
+            alert("Do you like my portfolio? Leave a comment!");
+        }, 5000);
+        
+        // Fake visitor counter with random incrementing
+        let visitorCount = Math.floor(Math.random() * 1000);
+        const counterElem = document.getElementById('visitor-counter');
+        
+        function updateCounter() {
+            visitorCount += Math.floor(Math.random() * 5) + 1;
+            counterElem.innerHTML = 'Visitors: ' + visitorCount;
+            setTimeout(updateCounter, 3000);
+        }
+        
+        updateCounter();
+        
+        // Mouse trailer effect
+        document.onmousemove = function(e) {
+            if (Math.random() < 0.01) { // 1% chance of creating a popup when moving mouse
+                createRandomPopup();
+            }
+        };
+    </script>
+</body>
+</html>

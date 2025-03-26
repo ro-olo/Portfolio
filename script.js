@@ -448,4 +448,67 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.projects__title').forEach(title => {
         observer.observe(title);
     });
+
+    // Theme Switcher
+    const themeLinks = document.querySelectorAll('.dropdown-link');
+    
+    // Gestione del cambio tema
+    themeLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Rimuovi la classe 'active' da tutti i link
+            themeLinks.forEach(item => item.classList.remove('active'));
+            
+            // Aggiungi la classe 'active' al link cliccato
+            link.classList.add('active');
+            
+            // Ottieni il tema selezionato dall'attributo data-theme
+            const selectedTheme = link.getAttribute('data-theme');
+            
+            // Salva il tema selezionato in localStorage per persistenza
+            localStorage.setItem('selectedTheme', selectedTheme);
+            
+            // Applica il tema selezionato
+            applyTheme(selectedTheme);
+        });
+    });
+    
+    // Funzione per applicare il tema
+    function applyTheme(theme) {
+        // Rimuovi eventuali classi di tema esistenti dal body
+        document.body.classList.remove('theme-coolest-ever', 'theme-coolest-earth', 'theme-boring');
+        
+        // Aggiungi la classe del tema selezionato
+        document.body.classList.add(`theme-${theme}`);
+        
+        // Salva il tema selezionato in localStorage
+        localStorage.setItem('selectedTheme', theme);
+        
+        // Gestisci il cambio di tema
+        if (theme === 'boring') {
+            // Reindirizza alla versione "boring" del sito
+            window.location.href = 'boring.html';
+        } else if (theme !== 'coolest-ever') {
+            // Per gli altri temi non ancora implementati
+            alert(`Il tema "${theme}" sarà implementato a breve! Per ora rimane il tema attuale.`);
+        }
+    }
+    
+    // Controlla se c'è un tema salvato in localStorage
+    const savedTheme = localStorage.getItem('selectedTheme');
+    if (savedTheme) {
+        // Trova il link corrispondente al tema salvato
+        const themeLink = document.querySelector(`.dropdown-link[data-theme="${savedTheme}"]`);
+        if (themeLink) {
+            // Rimuovi la classe 'active' da tutti i link
+            themeLinks.forEach(item => item.classList.remove('active'));
+            
+            // Aggiungi la classe 'active' al link del tema salvato
+            themeLink.classList.add('active');
+            
+            // Applica il tema salvato
+            applyTheme(savedTheme);
+        }
+    }
 });
