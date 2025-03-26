@@ -365,4 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.projects__title').forEach(title => {
         observer.observe(title);
     });
+    
+    // Qui andrà il nuovo codice per il parallax quando lo riscriveremo
 });

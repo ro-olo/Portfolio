@@ -39,3 +39,15 @@ button {
 ul, ol {
   list-style: none;
 }
+
+/* Rimuovo la preparazione per l'effetto parallax sulle sezioni */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Classe per gli elementi con effetto parallax */
+.parallax-element {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
