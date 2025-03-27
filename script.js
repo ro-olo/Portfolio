@@ -428,6 +428,48 @@ document.addEventListener('DOMContentLoaded', () => {
         new ProjectCarousel(designSection, projectsData.design, 'design');
     }
 
+    // Animazione per le sezioni quando entrano nel viewport
+    function setupScrollAnimations() {
+        // Seleziona tutti gli elementi da animare
+        const devSection = document.querySelector('.projects__section--dev');
+        const designSection = document.querySelector('.projects__section--design');
+        const contactSection = document.querySelector('.contact');
+        
+        // Array di elementi da animare
+        const elementsToAnimate = [
+            { element: devSection, threshold: 0.05 },
+            { element: designSection, threshold: 0.05 },
+            { element: contactSection, threshold: 0.1 }
+        ];
+        
+        // Crea un Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Quando un elemento entra nel viewport
+                if (entry.isIntersecting) {
+                    // Aggiungi la classe 'visible' per attivare l'animazione
+                    entry.target.classList.add('visible');
+                    
+                    // Smetti di osservare dopo che l'animazione è stata attivata
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null, // Usa il viewport come container
+            rootMargin: '0px 0px -100px 0px' // Margine negativo per anticipare l'attivazione
+        });
+
+        // Osserva tutti gli elementi da animare
+        elementsToAnimate.forEach(item => {
+            if (item.element) {
+                observer.observe(item.element);
+            }
+        });
+    }
+
+    // Esegui la funzione dopo che la pagina è caricata
+    setupScrollAnimations();
+
     // Intersection Observer per le animazioni dei titoli
     const observerOptions = {
         root: null,
@@ -448,6 +490,76 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.projects__title').forEach(title => {
         observer.observe(title);
     });
+
+    // Animazione per le card dei progetti quando entrano nel viewport
+    function setupCardAnimations() {
+        // Crea un Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Quando una card entra nel viewport
+                if (entry.isIntersecting) {
+                    // Aggiungi la classe 'visible' con un ritardo basato sull'indice
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, entry.target.dataset.index * 150); // Ritardo progressivo per ogni card
+                    
+                    // Smetti di osservare l'elemento dopo che è stato animato
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null, // Usa il viewport come container
+            rootMargin: '0px', // Nessun margine
+            threshold: 0.1 // Attiva quando almeno il 10% della card è visibile
+        });
+
+        // Osserva tutte le card dei progetti
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            // Aggiungi un attributo data-index per il ritardo progressivo
+            card.dataset.index = index;
+            observer.observe(card);
+        });
+    }
+
+    // Esegui la funzione dopo che le card sono state create
+    const checkCardsInterval = setInterval(() => {
+        const cards = document.querySelectorAll('.project-card');
+        if (cards.length > 0) {
+            setupCardAnimations();
+            clearInterval(checkCardsInterval);
+        }
+    }, 100);
+
+    // Animazione per la sezione progetti quando entra nel viewport
+    function setupProjectsAnimation() {
+        const projectsSection = document.querySelector('.projects');
+        
+        if (!projectsSection) return;
+        
+        // Crea un Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Quando la sezione progetti entra nel viewport
+                if (entry.isIntersecting) {
+                    // Aggiungi la classe 'visible' per attivare l'animazione
+                    projectsSection.classList.add('visible');
+                    
+                    // Smetti di osservare dopo che l'animazione è stata attivata
+                    observer.unobserve(projectsSection);
+                }
+            });
+        }, {
+            root: null, // Usa il viewport come container
+            rootMargin: '0px', // Nessun margine
+            threshold: 0.1 // Attiva quando almeno il 10% della sezione è visibile
+        });
+
+        // Osserva la sezione progetti
+        observer.observe(projectsSection);
+    }
+
+    // Esegui la funzione dopo che la pagina è caricata
+    setupProjectsAnimation();
 
     // Theme Switcher
     const themeLinks = document.querySelectorAll('.dropdown-link');
@@ -510,5 +622,67 @@ document.addEventListener('DOMContentLoaded', () => {
             // Applica il tema salvato
             applyTheme(savedTheme);
         }
+    }
+
+    // Miglioramento del menu a discesa dei temi
+    const themeDropdown = document.querySelector('.dropdown');
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    let isMenuOpen = false;
+    let timeoutId;
+    
+    if (themeDropdown && dropdownToggle && dropdownMenu) {
+        // Gestione click sul toggle
+        dropdownToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            if (!isMenuOpen) {
+                // Apri il menu
+                dropdownMenu.classList.add('show');
+                isMenuOpen = true;
+            } else {
+                // Chiudi il menu
+                dropdownMenu.classList.remove('show');
+                isMenuOpen = false;
+            }
+        });
+        
+        // Gestione hover sul dropdown
+        themeDropdown.addEventListener('mouseenter', () => {
+            // Cancella eventuali timeout di chiusura
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+                timeoutId = null;
+            }
+            // Mostra il menu
+            dropdownMenu.classList.add('show');
+            isMenuOpen = true;
+        });
+        
+        themeDropdown.addEventListener('mouseleave', () => {
+            // Imposta un timeout per chiudere il menu
+            timeoutId = setTimeout(() => {
+                dropdownMenu.classList.remove('show');
+                isMenuOpen = false;
+            }, 3000); // 3 secondi di ritardo prima di chiudere
+        });
+        
+        // Chiudi il menu quando si clicca su un'opzione
+        dropdownMenu.addEventListener('click', (e) => {
+            // Non chiudere immediatamente per dare tempo all'evento click del tema di essere gestito
+            setTimeout(() => {
+                dropdownMenu.classList.remove('show');
+                isMenuOpen = false;
+            }, 100);
+        });
+        
+        // Chiudi il menu quando si clicca fuori
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !themeDropdown.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+                isMenuOpen = false;
+            }
+        });
     }
 });

@@ -107,5 +107,30 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Funzione per mantenere aperto il menu a discesa
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.nav__item--dropdown');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+            
+            if (dropdown && dropdownMenu) {
+                // Mantieni il menu aperto quando il mouse entra nel dropdown
+                dropdown.addEventListener('mouseenter', function() {
+                    dropdownMenu.style.display = 'block';
+                    dropdownMenu.style.opacity = '1';
+                    dropdownMenu.style.transform = 'translateY(0)';
+                });
+                
+                // Aggiungi un ritardo prima di chiudere il menu quando il mouse esce
+                dropdown.addEventListener('mouseleave', function() {
+                    // Usa setTimeout per ritardare la chiusura
+                    setTimeout(function() {
+                        dropdownMenu.style.display = 'none';
+                    }, 3000); // 3 secondi di ritardo
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

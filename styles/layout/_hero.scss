@@ -35,6 +35,10 @@
     position: relative;
     display: inline-block;
     padding-bottom: 1rem;
+    opacity: 0; 
+    transform: translateX(-50px) scale(0.8); 
+    animation: slideIn 0.8s ease forwards; 
+    animation-delay: 0.2s; 
 
     &::after {
       content: '';
@@ -51,11 +55,19 @@
     font-size: $font-size-xl;
     color: $text-color;
     margin-bottom: 2rem;
+    opacity: 0; 
+    transform: translateX(-50px) scale(0.8); 
+    animation: slideIn 0.8s ease forwards; 
+    animation-delay: 0.8s; 
   }
 
   &__about {
     margin-top: 2rem;
     max-width: 1100px;
+    opacity: 0; 
+    transform: translateY(70px); 
+    animation: slideInFromBottom 1.5s ease forwards; 
+    animation-delay: 1.3s; 
     
     p {
       font-size: $font-size-md;
@@ -125,5 +137,41 @@
     p:not(:last-child) {
       margin-bottom: 1rem;
     }
+  }
+}
+
+// Keyframes per l'animazione di entrata
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+// Keyframes per l'animazione di entrata da destra
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+// Keyframes per l'animazione di entrata dal basso
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(70px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

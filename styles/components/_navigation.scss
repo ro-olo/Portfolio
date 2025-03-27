@@ -41,27 +41,31 @@
         display: none;
         position: absolute;
         top: 100%;
-        left: 0; // Allineato a sinistra invece che al centro
-        transform: translateX(-60%); // Rimosso per non spostare il menu a destra
+        right: 0; // Allineato a destra con il pulsante Themes
+        left: auto; // Rimuove l'allineamento a sinistra
         background-color: rgba($background-color, 0.9);
         backdrop-filter: blur(10px);
         border-radius: 0.5rem;
         padding: 0.5rem 0;
-        min-width: 200px; // Leggermente più largo
+        min-width: 180px; // Leggermente più largo
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         z-index: 101;
         margin-top: 0.5rem;
         border: 1px solid rgba($accent-color-start, 0.2);
+        transition: opacity 0.3s ease, transform 0.3s ease; // Transizione ancora più lenta
+        opacity: 0;
+        transform: translateY(-10px); // Solo spostamento verticale
         
         &::before {
           content: '';
           position: absolute;
           top: -5px;
-          left: 20px; // Spostato a sinistra
+          right: 0; // Posizionato a destra
+          left: auto; // Rimuove il posizionamento a sinistra
+          transform: rotate(45deg); // Solo rotazione
           width: 10px;
           height: 10px;
           background-color: rgba($background-color, 0.9);
-          transform: rotate(45deg);
           border-top: 1px solid rgba($accent-color-start, 0.2);
           border-left: 1px solid rgba($accent-color-start, 0.2);
         }
@@ -69,6 +73,13 @@
       
       &:hover .dropdown-menu {
         display: block;
+        opacity: 1;
+        transform: translateY(0); // Solo spostamento verticale
+        transition-delay: 0s; /* Nessun ritardo quando appare */
+      }
+      
+      &:not(:hover) .dropdown-menu {
+        transition-delay: 3s; /* Ritardo di 3 secondi prima di scomparire */
       }
     }
   }
