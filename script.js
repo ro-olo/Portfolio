@@ -1,4 +1,4 @@
-// Gestione parallax background
+// Parallax background management
 document.addEventListener('DOMContentLoaded', () => {
     const parallaxLayers = document.querySelectorAll('.parallax-layer');
     
@@ -44,16 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Visualizzazione dei progetti
+    // Projects display
     const devProjectsData = [
-        // I tuoi dati dei progetti di sviluppo qui
+        // Your development project data here
     ];
 
     const designProjectsData = [
-        // I tuoi dati dei progetti di design qui
+        // Your design project data here
     ];
 
-    // Funzione per rendere i progetti
+    // Function to render projects
     function renderProjects(projectsData, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -61,22 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
         projectsData.forEach(project => {
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
-            // Aggiungi il contenuto della card del progetto
+            // Add project card content
+            const card = createProjectCard(project);
+            container.appendChild(card);
         });
     }
 
-    // Renderizza i progetti
+    // Render projects
     renderProjects(devProjectsData, 'devProjects');
     renderProjects(designProjectsData, 'designProjects');
 
-    // Gestione carousel progetti
+    // Project carousel management
     document.querySelectorAll('.projects__section').forEach(section => {
         const carousel = section.querySelector('.projects__carousel');
         const prevBtn = section.querySelector('.prev');
         const nextBtn = section.querySelector('.next');
 
         if (carousel && prevBtn && nextBtn) {
-            // Aggiungi la logica del carousel qui
+            // Add carousel logic here
         }
     });
 });
@@ -270,14 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
             this.type = type;
             this.isAnimating = false;
 
-            // Duplica i progetti per l'effetto circolare
+            // Duplicate projects for circular effect
             this.allProjects = [...projects, ...projects, ...projects];
             
             this.initialize();
             this.setupEventListeners();
             this.updateCarousel();
             
-            // Aggiungi listener per il resize della finestra
+            // Add listener for window resize
             window.addEventListener('resize', () => {
                 this.updateActiveCards();
             });
@@ -300,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             this.track.addEventListener('transitionend', (e) => {
-                // Ignora gli eventi di transizione delle cards individuali
+                // Ignore individual card transition events
                 if (e.target !== this.track) return;
                 
                 this.isAnimating = false;
@@ -313,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         resetToStart() {
-            // Rimuovi temporaneamente le classi active e center per evitare transizioni
+            // Temporarily remove active and center classes to avoid transitions
             this.updateActiveCards(true);
             
             this.track.style.transition = 'none';
@@ -321,21 +323,21 @@ document.addEventListener('DOMContentLoaded', () => {
             this.track.style.transform = `translateX(0)`;
             this.track.offsetHeight;
             
-            // Riapplica le classi senza transizione
+            // Reapply classes without transition
             this.updateActiveCards(true);
             this.track.offsetHeight;
             
-            // Riattiva le transizioni
+            // Reactivate transitions
             this.track.style.transition = 'transform 0.5s ease-out';
             
-            // Riapplica le classi con transizione
+            // Reapply classes with transition
             setTimeout(() => {
                 this.updateActiveCards();
             }, 50);
         }
 
         resetToEnd() {
-            // Rimuovi temporaneamente le classi active e center per evitare transizioni
+            // Temporarily remove active and center classes to avoid transitions
             this.updateActiveCards(true);
             
             this.track.style.transition = 'none';
@@ -344,14 +346,14 @@ document.addEventListener('DOMContentLoaded', () => {
             this.track.style.transform = `translateX(-${moveAmount}px)`;
             this.track.offsetHeight;
             
-            // Riapplica le classi senza transizione
+            // Reapply classes without transition
             this.updateActiveCards(true);
             this.track.offsetHeight;
             
-            // Riattiva le transizioni
+            // Reactivate transitions
             this.track.style.transition = 'transform 0.5s ease-out';
             
-            // Riapplica le classi con transizione
+            // Reapply classes with transition
             setTimeout(() => {
                 this.updateActiveCards();
             }, 50);
@@ -384,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const windowWidth = window.innerWidth;
             let visibleCards = 3;
             
-            // Determina il numero di cards visibili in base alla larghezza dello schermo
+            // Determine the number of visible cards based on screen width
             if (windowWidth <= 1100 && windowWidth > 800) {
                 visibleCards = 2;
             } else if (windowWidth <= 800) {
@@ -404,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (relativeIndex >= 0 && relativeIndex < visibleCards) {
                     card.classList.add('active');
                     
-                    // Aggiungi la classe center solo se ci sono 3 cards visibili
+                    // Add center class only if there are 3 visible cards
                     if (visibleCards === 3 && relativeIndex === 1) {
                         card.classList.add('center');
                     }
@@ -428,38 +430,38 @@ document.addEventListener('DOMContentLoaded', () => {
         new ProjectCarousel(designSection, projectsData.design, 'design');
     }
 
-    // Animazione per le sezioni quando entrano nel viewport
+    // Animation for sections when they enter the viewport
     function setupScrollAnimations() {
-        // Seleziona tutti gli elementi da animare
+        // Select all elements to animate
         const devSection = document.querySelector('.projects__section--dev');
         const designSection = document.querySelector('.projects__section--design');
         const contactSection = document.querySelector('.contact');
         
-        // Array di elementi da animare
+        // Array of elements to animate
         const elementsToAnimate = [
             { element: devSection, threshold: 0.05 },
             { element: designSection, threshold: 0.05 },
             { element: contactSection, threshold: 0.1 }
         ];
         
-        // Crea un Intersection Observer
+        // Create an Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Quando un elemento entra nel viewport
+                // When an element enters the viewport
                 if (entry.isIntersecting) {
-                    // Aggiungi la classe 'visible' per attivare l'animazione
+                    // Add the 'visible' class to activate the animation
                     entry.target.classList.add('visible');
                     
-                    // Smetti di osservare dopo che l'animazione è stata attivata
+                    // Stop observing after the animation has been activated
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            root: null, // Usa il viewport come container
-            rootMargin: '0px 0px -100px 0px' // Margine negativo per anticipare l'attivazione
+            root: null, // Use the viewport as the container
+            rootMargin: '0px 0px -100px 0px' // Negative margin to anticipate activation
         });
 
-        // Osserva tutti gli elementi da animare
+        // Observe all elements to animate
         elementsToAnimate.forEach(item => {
             if (item.element) {
                 observer.observe(item.element);
@@ -467,10 +469,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Esegui la funzione dopo che la pagina è caricata
+    // Run the function after the page has loaded
     setupScrollAnimations();
 
-    // Intersection Observer per le animazioni dei titoli
+    // Intersection Observer for title animations
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -486,42 +488,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Osserva i titoli delle sezioni
+    // Observe section titles
     document.querySelectorAll('.projects__title').forEach(title => {
         observer.observe(title);
     });
 
-    // Animazione per le card dei progetti quando entrano nel viewport
+    // Animation for project cards when they enter the viewport
     function setupCardAnimations() {
-        // Crea un Intersection Observer
+        // Create an Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Quando una card entra nel viewport
+                // When a card enters the viewport
                 if (entry.isIntersecting) {
-                    // Aggiungi la classe 'visible' con un ritardo basato sull'indice
+                    // Add the 'visible' class with a delay based on the index
                     setTimeout(() => {
                         entry.target.classList.add('visible');
-                    }, entry.target.dataset.index * 150); // Ritardo progressivo per ogni card
+                    }, entry.target.dataset.index * 150); // Progressive delay for each card
                     
-                    // Smetti di osservare l'elemento dopo che è stato animato
+                    // Stop observing the element after it has been animated
                     observer.unobserve(entry.target);
                 }
             });
         }, {
-            root: null, // Usa il viewport come container
-            rootMargin: '0px', // Nessun margine
-            threshold: 0.1 // Attiva quando almeno il 10% della card è visibile
+            root: null, // Use the viewport as the container
+            rootMargin: '0px', // No margin
+            threshold: 0.1 // Activate when at least 10% of the card is visible
         });
 
-        // Osserva tutte le card dei progetti
+        // Observe all project cards
         document.querySelectorAll('.project-card').forEach((card, index) => {
-            // Aggiungi un attributo data-index per il ritardo progressivo
+            // Add a data-index attribute for the progressive delay
             card.dataset.index = index;
             observer.observe(card);
         });
     }
 
-    // Esegui la funzione dopo che le card sono state create
+    // Run the function after the cards have been created
     const checkCardsInterval = setInterval(() => {
         const cards = document.querySelectorAll('.project-card');
         if (cards.length > 0) {
@@ -530,101 +532,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 100);
 
-    // Animazione per la sezione progetti quando entra nel viewport
+    // Animation for the projects section when it enters the viewport
     function setupProjectsAnimation() {
         const projectsSection = document.querySelector('.projects');
         
         if (!projectsSection) return;
         
-        // Crea un Intersection Observer
+        // Create an Intersection Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // Quando la sezione progetti entra nel viewport
+                // When the projects section enters the viewport
                 if (entry.isIntersecting) {
-                    // Aggiungi la classe 'visible' per attivare l'animazione
+                    // Add the 'visible' class to activate the animation
                     projectsSection.classList.add('visible');
                     
-                    // Smetti di osservare dopo che l'animazione è stata attivata
+                    // Stop observing after the animation has been activated
                     observer.unobserve(projectsSection);
                 }
             });
         }, {
-            root: null, // Usa il viewport come container
-            rootMargin: '0px', // Nessun margine
-            threshold: 0.1 // Attiva quando almeno il 10% della sezione è visibile
+            root: null, // Use the viewport as the container
+            rootMargin: '0px', // No margin
+            threshold: 0.1 // Activate when at least 10% of the section is visible
         });
 
-        // Osserva la sezione progetti
+        // Observe the projects section
         observer.observe(projectsSection);
     }
 
-    // Esegui la funzione dopo che la pagina è caricata
+    // Run the function after the page has loaded
     setupProjectsAnimation();
 
     // Theme Switcher
     const themeLinks = document.querySelectorAll('.dropdown-link');
     
-    // Gestione del cambio tema
+    // Theme change management
     themeLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Rimuovi la classe 'active' da tutti i link
+            // Remove the 'active' class from all links
             themeLinks.forEach(item => item.classList.remove('active'));
             
-            // Aggiungi la classe 'active' al link cliccato
+            // Add the 'active' class to the clicked link
             link.classList.add('active');
             
-            // Ottieni il tema selezionato dall'attributo data-theme
+            // Get the selected theme from the data-theme attribute
             const selectedTheme = link.getAttribute('data-theme');
             
-            // Salva il tema selezionato in localStorage per persistenza
+            // Save the selected theme in localStorage for persistence
             localStorage.setItem('selectedTheme', selectedTheme);
             
-            // Applica il tema selezionato
+            // Apply the selected theme
             applyTheme(selectedTheme);
         });
     });
     
-    // Funzione per applicare il tema
+    // Function to apply the theme
     function applyTheme(theme) {
-        // Rimuovi eventuali classi di tema esistenti dal body
+        // Remove any existing theme classes from the body
         document.body.classList.remove('theme-coolest-ever', 'theme-coolest-earth', 'theme-boring');
         
-        // Aggiungi la classe del tema selezionato
+        // Add the class of the selected theme
         document.body.classList.add(`theme-${theme}`);
         
-        // Salva il tema selezionato in localStorage
+        // Save the selected theme in localStorage
         localStorage.setItem('selectedTheme', theme);
         
-        // Gestisci il cambio di tema
+        // Handle theme change
         if (theme === 'boring') {
-            // Reindirizza alla versione "boring" del sito
+            // Redirect to the "boring" version of the site
             window.location.href = 'boring.html';
         } else if (theme !== 'coolest-ever') {
-            // Per gli altri temi non ancora implementati
-            alert(`Il tema "${theme}" sarà implementato a breve! Per ora rimane il tema attuale.`);
+            // For other themes not yet implemented
+            alert(`The "${theme}" theme will be implemented soon! For now, the current theme remains.`);
         }
     }
     
-    // Controlla se c'è un tema salvato in localStorage
+    // Check if a theme is saved in localStorage
     const savedTheme = localStorage.getItem('selectedTheme');
     if (savedTheme) {
-        // Trova il link corrispondente al tema salvato
+        // Find the link corresponding to the saved theme
         const themeLink = document.querySelector(`.dropdown-link[data-theme="${savedTheme}"]`);
         if (themeLink) {
-            // Rimuovi la classe 'active' da tutti i link
+            // Remove the 'active' class from all links
             themeLinks.forEach(item => item.classList.remove('active'));
             
-            // Aggiungi la classe 'active' al link del tema salvato
+            // Add the 'active' class to the link of the saved theme
             themeLink.classList.add('active');
             
-            // Applica il tema salvato
+            // Apply the saved theme
             applyTheme(savedTheme);
         }
     }
 
-    // Miglioramento del menu a discesa dei temi
+    // Improvement of the theme dropdown menu
     const themeDropdown = document.querySelector('.dropdown');
     const dropdownToggle = document.querySelector('.dropdown-toggle');
     const dropdownMenu = document.querySelector('.dropdown-menu');
@@ -632,52 +634,52 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeoutId;
     
     if (themeDropdown && dropdownToggle && dropdownMenu) {
-        // Gestione click sul toggle
+        // Handle click on the toggle
         dropdownToggle.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             
             if (!isMenuOpen) {
-                // Apri il menu
+                // Open the menu
                 dropdownMenu.classList.add('show');
                 isMenuOpen = true;
             } else {
-                // Chiudi il menu
+                // Close the menu
                 dropdownMenu.classList.remove('show');
                 isMenuOpen = false;
             }
         });
         
-        // Gestione hover sul dropdown
+        // Handle hover on the dropdown
         themeDropdown.addEventListener('mouseenter', () => {
-            // Cancella eventuali timeout di chiusura
+            // Cancel any close timeouts
             if (timeoutId) {
                 clearTimeout(timeoutId);
                 timeoutId = null;
             }
-            // Mostra il menu
+            // Show the menu
             dropdownMenu.classList.add('show');
             isMenuOpen = true;
         });
         
         themeDropdown.addEventListener('mouseleave', () => {
-            // Imposta un timeout per chiudere il menu
+            // Set a timeout to close the menu
             timeoutId = setTimeout(() => {
                 dropdownMenu.classList.remove('show');
                 isMenuOpen = false;
-            }, 3000); // 3 secondi di ritardo prima di chiudere
+            }, 3000); // 3-second delay before closing
         });
         
-        // Chiudi il menu quando si clicca su un'opzione
+        // Close the menu when an option is clicked
         dropdownMenu.addEventListener('click', (e) => {
-            // Non chiudere immediatamente per dare tempo all'evento click del tema di essere gestito
+            // Do not close immediately to give time for the theme click event to be handled
             setTimeout(() => {
                 dropdownMenu.classList.remove('show');
                 isMenuOpen = false;
             }, 100);
         });
         
-        // Chiudi il menu quando si clicca fuori
+        // Close the menu when clicked outside
         document.addEventListener('click', (e) => {
             if (isMenuOpen && !themeDropdown.contains(e.target)) {
                 dropdownMenu.classList.remove('show');
