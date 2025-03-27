@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Projects display
     const devProjectsData = [
-        // Your development project data here
+        // development project data here
     ];
 
     const designProjectsData = [
-        // Your design project data here
+        // design project data here
     ];
 
     // Function to render projects
@@ -603,6 +603,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (theme === 'boring') {
             // Redirect to the "boring" version of the site
             window.location.href = 'boring.html';
+        } else if (theme === 'coolest-earth') {
+            // Redirect to the "coolest on earth" version of the site
+            window.location.href = 'coolest-earth.html';
         } else if (theme !== 'coolest-ever') {
             // For other themes not yet implemented
             alert(`The "${theme}" theme will be implemented soon! For now, the current theme remains.`);
@@ -621,8 +624,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add the 'active' class to the link of the saved theme
             themeLink.classList.add('active');
             
-            // Apply the saved theme
-            applyTheme(savedTheme);
+            // Apply the saved theme only if we're not already on the index page
+            // and the page was just loaded (not if the user is actively switching themes)
+            const isInitialLoad = !document.referrer || document.referrer.includes('index.html');
+            if (!isInitialLoad || (savedTheme !== 'coolest-earth' && savedTheme !== 'boring')) {
+                applyTheme(savedTheme);
+            }
         }
     }
 
