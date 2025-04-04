@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 10000;
   background-color: rgba($background-color, 0.1); // Quasi trasparente
   backdrop-filter: blur(5px); // Aggiunge un effetto blur per leggibilità
   padding: 0.5rem 1.5rem; // 
@@ -31,6 +31,45 @@
     gap: 2rem;
     list-style: none;
     align-items: center; // Allinea verticalmente tutti gli elementi
+  }
+
+  &__burger-icon {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 24px;
+    position: relative;
+    z-index: 1001;
+    
+    span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: $text-color;
+      margin-bottom: 5px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      border-radius: 2px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    &.active {
+      span {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 6px);
+        }
+        
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(5px, -6px);
+        }
+      }
+    }
   }
 
   &__item {
@@ -155,5 +194,74 @@
     color: $accent-color-start;
     font-weight: 500;
     background-color: rgba($accent-color-start, 0.05);
+  }
+}
+
+// Media query per la versione mobile
+@media (max-width: 768px) {
+  .nav {
+    padding: 0.5rem 1rem;
+    
+    &__burger-icon {
+      display: block;
+    }
+    
+    &__menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba($background-color, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-radius: 0 0 1rem 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      align-items: center;
+      z-index: 999;
+      
+      &.active {
+        display: flex;
+      }
+    }
+    
+    &__item {
+      margin-bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      
+      &--dropdown {
+        .dropdown-menu {
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          box-shadow: none;
+          background-color: transparent;
+          padding: 0.5rem 0;
+          width: 100%;
+          display: none;
+          
+          &.active {
+            display: block;
+          }
+        }
+        
+        .dropdown-item {
+          text-align: center;
+        }
+      }
+    }
+    
+    &__link {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      display: block;
+      
+      &--dropdown {
+        justify-content: center;
+      }
+    }
   }
 }

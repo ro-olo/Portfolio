@@ -123,6 +123,32 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
+        .nav__burger-icon {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .nav__burger-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin-bottom: 5px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .nav__burger-icon.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .nav__burger-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .nav__burger-icon.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
         .nav__menu {
             display: flex;
             gap: 2rem;
@@ -659,6 +685,15 @@
                 font-size: 1.2rem;
             }
             
+            .hero__about p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+            
+            .hero__about p:nth-child(2) {
+                display: none; /* Nascondiamo il secondo paragrafo su mobile */
+            }
+            
             .projects__grid {
                 grid-template-columns: 1fr;
             }
@@ -666,6 +701,106 @@
             .contact__links {
                 gap: 1.5rem;
             }
+            
+            .nav__burger-icon {
+                display: block;
+            }
+            
+            .nav__menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(var(--background-color), 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                border-radius: 0 0 1rem 1rem;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                align-items: center;
+                z-index: 9999;
+            }
+            
+            .nav__menu.active {
+                display: flex;
+            }
+            
+            .nav__item {
+                margin-bottom: 1rem;
+            }
+            
+            .nav__link {
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+                display: block;
+                text-align: center;
+            }
+        }
+        
+        /* Stili per il razzo e l'animazione di decollo */
+        .rocket-takeoff-container {
+            position: fixed;
+            bottom: -500px; /* Inizialmente fuori dallo schermo */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100vh; /* Altezza fissa per coprire tutta la finestra */
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .rocket-takeoff {
+            position: absolute;
+            bottom: -400px; /* Inizia fuori dallo schermo in basso */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: auto;
+            z-index: 9999;
+        }
+        
+        @keyframes rocketTakeoff {
+            0% {
+                bottom: -400px; /* Inizia fuori dallo schermo */
+                opacity: 0;
+            }
+            10% {
+                bottom: -100px; /* Inizia a diventare visibile */
+                opacity: 1;
+            }
+            70% {
+                bottom: 100vh; /* Sale oltre lo schermo */
+                opacity: 1;
+            }
+            100% {
+                bottom: 200vh; /* Completamente fuori dallo schermo */
+                opacity: 1;
+            }
+        }
+        
+        .rocket-takeoff-active {
+            animation: rocketTakeoff 3s linear forwards;
+        }
+        
+        /* Effetto di dissolvenza per la pagina durante il decollo */
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2s ease;
+        }
+        
+        .page-transition-active {
+            opacity: 1;
         }
     </style>
 </head>
@@ -682,13 +817,26 @@
         <div class="tree earth-element"></div>
     </div>
     
+    <!-- Razzo per l'animazione di decollo -->
+    <div class="rocket-takeoff-container">
+        <img src="assets/images/razzo_pixel_art_dettagliato.png" alt="rocket" class="rocket-takeoff">
+    </div>
+    
+    <!-- Effetto di transizione della pagina -->
+    <div class="page-transition"></div>
+    
     <nav class="nav">
+        <div class="nav__burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <ul class="nav__menu">
             <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
             <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
             <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
             <li class="nav__item">
-                <a href="index.html" class="nav__link nav__link--back" onclick="localStorage.setItem('selectedTheme', 'coolest-ever'); return true;">Back to Main</a>
+                <a href="javascript:void(0)" class="nav__link nav__link--back" id="backToMain">Back to Main</a>
             </li>
         </ul>
     </nav>
@@ -910,6 +1058,70 @@
             setupScrollAnimations();
             setupHeroAnimations();
             setupCardAnimations();
+            
+            // Funzione per gestire il burger menu
+            function setupBurgerMenu() {
+                const burgerIcon = document.querySelector('.nav__burger-icon');
+                const navMenu = document.querySelector('.nav__menu');
+                
+                if (burgerIcon && navMenu) {
+                    burgerIcon.addEventListener('click', function() {
+                        this.classList.toggle('active');
+                        navMenu.classList.toggle('active');
+                    });
+                    
+                    // Chiudi il menu quando si clicca su un link
+                    const navLinks = document.querySelectorAll('.nav__link');
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', function() {
+                            burgerIcon.classList.remove('active');
+                            navMenu.classList.remove('active');
+                        });
+                    });
+                    
+                    // Chiudi il menu quando si clicca fuori
+                    document.addEventListener('click', function(event) {
+                        if (!navMenu.contains(event.target) && !burgerIcon.contains(event.target)) {
+                            burgerIcon.classList.remove('active');
+                            navMenu.classList.remove('active');
+                        }
+                    });
+                }
+            }
+            
+            // Chiama la funzione di setup del burger menu dopo che il DOM è caricato
+            setupBurgerMenu();
+            
+            // Gestione dell'animazione di decollo del razzo
+            const backToMainLink = document.getElementById('backToMain');
+            const rocketContainer = document.querySelector('.rocket-takeoff-container');
+            const rocket = document.querySelector('.rocket-takeoff');
+            const pageTransition = document.querySelector('.page-transition');
+            
+            backToMainLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Memorizza il tema selezionato
+                localStorage.setItem('selectedTheme', 'coolest-ever');
+                
+                // Mostra il container del razzo
+                rocketContainer.style.opacity = '1';
+                
+                // Attiva l'animazione di decollo dopo un breve ritardo
+                setTimeout(() => {
+                    rocket.classList.add('rocket-takeoff-active');
+                }, 100);
+                
+                // Attiva la transizione della pagina
+                setTimeout(() => {
+                    pageTransition.classList.add('page-transition-active');
+                }, 1500);
+                
+                // Reindirizza alla pagina principale dopo che l'animazione u00e8 completata
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3500);
+            });
         });
         
         // Function to initialize carousels

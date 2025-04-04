@@ -694,4 +694,54 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Funzione per gestire il burger menu
+    function setupBurgerMenu() {
+        const burgerIcon = document.querySelector('.nav__burger-icon');
+        const navMenu = document.querySelector('.nav__menu');
+        const dropdownLinks = document.querySelectorAll('.nav__link--dropdown');
+        
+        if (burgerIcon && navMenu) {
+            burgerIcon.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Gestione dei dropdown nel menu mobile
+            dropdownLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const dropdownMenu = this.nextElementSibling;
+                        dropdownMenu.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // Chiudi il menu quando si clicca su un link (non dropdown)
+            const navLinks = document.querySelectorAll('.nav__link:not(.nav__link--dropdown)');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    burgerIcon.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Chiudi il menu quando si clicca fuori
+            document.addEventListener('click', function(event) {
+                if (!navMenu.contains(event.target) && !burgerIcon.contains(event.target)) {
+                    burgerIcon.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    
+                    // Chiudi anche tutti i dropdown aperti
+                    document.querySelectorAll('.dropdown-menu.active').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
+        }
+    }
+
+    // Chiama la funzione quando il DOM è caricato
+    setupBurgerMenu();
 });
